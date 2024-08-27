@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 from backend import create_connection, create_table
+import altair as alt
 
 # Function to fetch data from the database
 def fetch_data(conn):
@@ -24,7 +25,7 @@ def metric_box(label, value, color, width="100%"):
 
 # Main Streamlit application
 def main():
-    st.title("Dashboard with SQLite Database")
+    st.title(" Dashboard with SQLite Database")
 
     # Database file path
     database = "students.db"
@@ -171,28 +172,6 @@ def main():
                     metric_box("Total Verified Placement %", f"{contactable_percentage:.2f}%", "#034a7e")
 
                 st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
-
-                st.subheader("Funder-wise Summary Table")
-                summary_df = filtered_df.groupby('funder_name').agg({
-                    'download_from_cmis': 'count',
-                    'verification_done': lambda x: (x == 'Yes').sum(),
-                    'm_e_verified_students': lambda x: (x == 'Yes').sum(),
-                    'trained_status': lambda x: (x == 'Passed').sum(),
-                    'placement_status': lambda x: (x == 'Yes').sum(),
-                }).reset_index()
-
-                summary_df.rename(columns={
-                    'download_from_cmis': 'Total Data',
-                    'verification_done': 'Total Contactable',
-                    'm_e_verified_students': 'M&E Verified Enrollment',
-                    'trained_status': 'Total Trained',
-                    'placement_status': 'M&E Verified Placed'
-                }, inplace=True)
-
-                summary_df['Total Enrollment %'] = (summary_df['Total Contactable'] / summary_df['Total Data']) * 100
-                summary_df['Total Verified Placement %'] = (summary_df['M&E Verified Placed'] / summary_df['Total Data']) * 100
-
-                st.dataframe(summary_df)
 
         # Close the database connection
         if conn:
