@@ -148,6 +148,7 @@ def main():
                     verifi = filtered_df[filtered_df['placement_remarks'] != 'Unable_to_track']
                     plac_veri = verifi['placement_remarks'].count()
                     metric_box("Total Contactable-(Plac)", plac_veri, "#034a7e")
+
                 with col3:
                     verifi = filtered_df[filtered_df['placement_remarks'] == 'Unable_to_track']
                     plac_veri = verifi['placement_remarks'].count()
@@ -157,6 +158,7 @@ def main():
                     verifi = filtered_df[filtered_df['placement_remarks'] == 'Not_working_at_all']
                     plac_veri = verifi['placement_remarks'].count()
                     metric_box("Not working at all(Over Contactable)", plac_veri, "#034a7e")
+
                 with col5:
                     verifi = filtered_df[filtered_df['placement_status'] == 'Yes']
                     plac_veri = verifi['placement_status'].count()
@@ -188,8 +190,9 @@ def main():
                 }, inplace=True)
 
                 summary_df['Total Enrollment %'] = (summary_df['Total Contactable'] / summary_df['Total Data']) * 100
-                st.dataframe(summary_df)
+                summary_df['Total Verified Placement %'] = (summary_df['M&E Verified Placed'] / summary_df['Total Data']) * 100
 
+                st.dataframe(summary_df)
 
         # Close the database connection
         if conn:
