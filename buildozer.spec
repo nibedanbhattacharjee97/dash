@@ -3,7 +3,7 @@
 title = DashboardApp
 
 # (str) Package name
-package.name = dashboardapp
+package.name = myapp
 
 # (str) Package domain (needed to get a reverse domain to use as a package)
 package.domain = org.example
