@@ -23,15 +23,13 @@ jobs:
 
     - name: Install dependencies
       run: |
+        sudo dpkg --add-architecture i386
         sudo apt-get update
+        # Only install essential and available packages
         sudo apt-get install -y libgl1-mesa-dev libgles2-mesa-dev xvfb \
-                                build-essential ccache git libncurses5:i386 \
-                                libstdc++6:i386 libgtk2.0-0:i386 \
-                                libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 \
-                                libidn11:i386 liblzma5:i386 zlib1g:i386 \
-                                default-jdk unzip
+                                build-essential ccache git default-jdk unzip
 
-    - name: Install Buildozer
+    - name: Install Buildozer and other Python dependencies
       run: |
         pip install buildozer cython
 
