@@ -1,99 +1,47 @@
 [app]
 # (str) Title of your application
-title = DashboardApp
+title = MyKivyApp
 
 # (str) Package name
-package.name = dashboardapp
+package.name = mykivyapp
 
-# (str) Package domain (needed to get a reverse domain to use as a package)
+# (str) Package domain (needed for android/ios packaging)
 package.domain = org.example
 
-# (str) Source code where the main.py is located
+# (str) Source code where the main.py live
 source.include_exts = py,png,jpg,kv,atlas
 
-# (str) Application versioning (e.g., 1.0.0)
-version = 1.0.0
-
 # (list) Application requirements
-# Add any libraries your app needs here, including Kivy, Pandas, and SQLite
-requirements = python3,kivy,pandas,sqlite3
+# Ensure this line is only specified once and includes all necessary dependencies.
+requirements = python3,kivy,cython
 
-# (str) The entry point of your application
-# This is typically the main file of your app
-entrypoint = main.py
+# (list) Permissions required for your app (only for Android)
+# Example: (list) permissions required for the app, such as access to the internet, etc.
+# android.permissions = INTERNET
 
-# (list) Permissions required by your application
-# Include permissions if your app needs access to storage, internet, etc.
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE
-
-# (int) Android API level to target
-# You can specify the API level; default is usually fine for most cases
-android.api = 30
-
-# (int) Minimum API level required (default: 21)
-# Change this if you need to support older devices
-android.minapi = 21
-
-# (str) Android NDK version to use
-# This usually doesn't need to be changed from the default
-android.ndk = 23b
-
-# (bool) Enable or disable the inclusion of the compiled Python interpreter
-# Keep as default unless you have a specific reason to change it
-android.include_sqlite3 = true
-
-# (str) Directory to store the compiled APK
-# Specify a custom build directory if needed
-build_dir = build
-
-# (str) Icon of your application
-# Replace with your app's icon if available
-icon.filename = icon.png
-
-# (str) Android architecture to target (default is armeabi-v7a)
-# Specify additional architectures if needed
-android.arch = armeabi-v7a
-
-# (list) Additional files to include in your application package
-# Add any additional files or directories your app needs
-source.include_patterns = assets/*
-
-# (list) Java classes to include in your APK
-# Not needed unless you have custom Java code
-android.add_src =
-
-# (str) Presplash screen (before app starts)
-# Replace with your app's presplash screen if available
-presplash.filename = presplash.png
-
-# (list) Dependencies required for your application (e.g., pip libraries)
-# Buildozer will attempt to install these using pip
-requirements = kivy, sqlite3, pandas
-
-# (bool) Whether to use the SDL2 Java Bootstrapper
-# This is generally the recommended choice
-android.bootstrap = sdl2
-
-# (str) Additional environment variables
-# Set additional environment variables if needed for your app
-environment =
-
-# (bool) If True, run the logcat viewer on application start
-# Useful for debugging; disable if not needed
-log_level = 2
-
-# (bool) If True, automatically run the application after building
-# Useful for quick testing during development
-android.auto_start = true
-
-# (str) Orientation of your application
-# Choose from 'landscape', 'portrait', 'sensor', 'all'
+# (str) Supported orientation (one of: landscape, portrait or all)
 orientation = portrait
 
-# (str) Screen DPI to use
-# 'all' supports all DPI levels, but you can specify specific ones if needed
-android.dpi = all
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 1
 
-# (bool) Enable hardware acceleration
-# Keep enabled unless there are specific reasons to disable it
-android.hardware_accelerated = true
+# (str) The path to the icon of the application
+icon.filename = %(source.dir)s/data/icon.png
+
+# (str) Presplash of the application
+presplash.filename = %(source.dir)s/data/presplash.png
+
+# (str) The format used to package the app (e.g., apk, ipa, app)
+package_format = apk
+
+# (list) Additional files to include in the APK
+# source.include_exts = png, jpg, kv, atlas
+
+# (str) The default entry point for your application
+# If left blank, Buildozer will assume 'main.py'
+entrypoint = main.py
+
+# (bool) Copy library dependencies into the apk or leave them in the system path
+android.copy_libs = 1
+
+# Other configurations as needed...
