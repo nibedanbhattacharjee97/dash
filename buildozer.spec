@@ -3,7 +3,11 @@
 title = MyKivyApp
 
 # (str) Package name
+<<<<<<< HEAD
 package.name = mykivyapp
+=======
+package.name = myapp
+>>>>>>> 48e977fc49a3d0b16dd80419acc890f52e0d62e1
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.example
