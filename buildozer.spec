@@ -48,7 +48,7 @@ target = android
 [requirements]
 # (list of other options)
 # Uncomment to specify additional requirements
-# extra_requirements = sqlite3, pandas
+extra_requirements = sqlite3, pandas
 
 [package]
 # (list of other options)
