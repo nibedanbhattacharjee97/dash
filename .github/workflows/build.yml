@@ -1,53 +1,46 @@
-name: Build Kivy APK
+name: Build Kivy App
 
 on:
-  # Triggers the workflow on push or pull request events on the main branch
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
   build:
-    # The job runs on an Ubuntu virtual machine
     runs-on: ubuntu-latest
 
-    # Steps involved in the build job
     steps:
-      # Checkout the repository
-      - name: Checkout the code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # Set up Python
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10' # Specify the Python version required by your app
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
 
-      # Install Buildozer and Cython
-      - name: Install Buildozer and dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential ccache git libncurses5 unzip zlib1g-dev lib32z1 openjdk-11-jdk
-          pip install --upgrade pip setuptools
-          pip install buildozer cython virtualenv
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgl1-mesa-dev libgles2-mesa-dev xvfb \
+                                build-essential ccache git libncurses5:i386 \
+                                libstdc++6:i386 libgtk2.0-0:i386 \
+                                libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 \
+                                libidn11:i386 liblzma5:i386 zlib1g:i386 \
+                                default-jdk unzip
 
-      # Create virtual environment
-      - name: Create and activate virtual environment
-        run: |
-          python -m venv venv
-          source venv/bin/activate
+    - name: Install Buildozer
+      run: |
+        pip install buildozer cython
 
-      # Build the APK
-      - name: Build the APK
-        run: |
-          buildozer android debug
+    - name: Build APK
+      run: |
+        buildozer android debug
 
-      # Upload the APK as an artifact
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-apk
-          path: build/outputs/apk/debug/*.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: kivy-app-apk
+        path: bin/*.apk
