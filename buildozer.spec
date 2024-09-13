@@ -1,39 +1,56 @@
 [app]
-# (str) Title of your application
+# (list of other options)
 title = MyApp
-
-# (str) Package name
 package.name = myapp
-
-# (str) Package domain
 package.domain = org.example
-
-# (str) Source code where the main.py file is located
 source.include_exts = py,png,jpg,kv,atlas
-
-# (str) Application version
-version = 0.1
-
-# (list) Application requirements
+source.include_patterns = assets/*,images/*
+source.exclude_exts = spec
+version = 1.0
 requirements = python3,kivy
+orientation = portrait
+fullscreen = 0
+android.permissions = INTERNET, ACCESS_NETWORK_STATE
+android.arch = armeabi-v7a
+android.api = 31
+android.minapi = 21
+android.ndk_api = 21
+android.sdk = 31
+android.gradle_dependencies = com.google.android.material:material:1.4.0
+android.add_aapt2 = True
+android.entrypoint = main:main
+android.additional_java_dirs = src
 
-# (str) Supported screen orientations
-orientation = all
+[buildozer]
+# (list of other options)
+log_level = 2
 
-# (str) The filename of the entry point file
-entrypoint = main.py
+[deploy]
+# (list of other options)
+target = android
 
-# (list) Permissions required by your app
-android.permissions = INTERNET
+[python]
+# (list of other options)
+# Uncomment to add Python path
+# path = /path/to/python
 
-# (list) Supported Android architecture
-android.arch = arm64-v8a, armeabi-v7a
+[global]
+# (list of other options)
+# Uncomment to specify the location of the SDK and NDK
+# sdk_dir = /path/to/sdk
+# ndk_dir = /path/to/ndk
 
-# (str) The application icon
-icon.filename = %(source.dir)s/data/icon.png
+[log]
+# (list of other options)
+# Uncomment to specify log level
+# level = 2
 
-# (str) Presplash of the application
-presplash.filename = %(source.dir)s/data/presplash.png
+[requirements]
+# (list of other options)
+# Uncomment to specify additional requirements
+# extra_requirements = sqlite3, pandas
 
-# (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+[package]
+# (list of other options)
+# Uncomment to specify additional package options
+# packages = mypackage
