@@ -1,51 +1,52 @@
 [app]
 # (str) Title of your application
-title = MyKivyApp
+title = MyApp
 
 # (str) Package name
-<<<<<<< HEAD
-package.name = mykivyapp
-=======
 package.name = myapp
->>>>>>> 48e977fc49a3d0b16dd80419acc890f52e0d62e1
 
-# (str) Package domain (needed for android/ios packaging)
+# (str) Package domain (unique identifier)
 package.domain = org.example
 
-# (str) Source code where the main.py live
+# (str) Source code where the main.py file is located
 source.include_exts = py,png,jpg,kv,atlas
 
+# (str) Application version
+version = 0.1
+
 # (list) Application requirements
-# Ensure this line is only specified once and includes all necessary dependencies.
-requirements = python3,kivy,cython
+# Ensure this is a single, unique line
+requirements = python3,kivy
 
-# (list) Permissions required for your app (only for Android)
-# Example: (list) permissions required for the app, such as access to the internet, etc.
-# android.permissions = INTERNET
+# (str) Supported screen orientations
+orientation = all
 
-# (str) Supported orientation (one of: landscape, portrait or all)
-orientation = portrait
+# (bool) Whether to include the source code in the final APK
+source.include_exts = py,png,jpg,kv,atlas
 
-# (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+# (str) The filename of the entry point file
+entrypoint = main.py
 
-# (str) The path to the icon of the application
+# (list) Permissions required by your app
+android.permissions = INTERNET
+
+# (list) Supported Android architecture
+android.arch = arm64-v8a, armeabi-v7a
+
+# (list) The list of java .jar files to add to the libs dir
+#android.add_jars = foo.jar,bar.jar,baz.jar
+
+# (list) The list of Java classes to add to the activity options
+#android.activity_class = org.kivy.android.PythonActivity
+
+# (str) The application icon
 icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Presplash of the application
 presplash.filename = %(source.dir)s/data/presplash.png
 
-# (str) The format used to package the app (e.g., apk, ipa, app)
-package_format = apk
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 1
 
-# (list) Additional files to include in the APK
-# source.include_exts = png, jpg, kv, atlas
-
-# (str) The default entry point for your application
-# If left blank, Buildozer will assume 'main.py'
-entrypoint = main.py
-
-# (bool) Copy library dependencies into the apk or leave them in the system path
-android.copy_libs = 1
-
-# Other configurations as needed...
+# (str) Display the banner in the application
+#android.debug = 1
